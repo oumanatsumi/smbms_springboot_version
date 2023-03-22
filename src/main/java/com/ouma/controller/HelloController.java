@@ -18,8 +18,11 @@ public class HelloController {
 
     @RequestMapping("hi")
     public String hello(){
-
-        return "jsp/frame";
+        List<User> allUser = userService.findAllUser();
+        for(User user :allUser){
+            System.out.println(user.toString());
+        }
+        return "index";
     }
     @RequestMapping("/hi2")
     public ModelAndView  hello2(){
