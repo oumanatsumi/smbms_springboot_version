@@ -10,7 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class HelloController {
 
     @Autowired
@@ -19,13 +19,7 @@ public class HelloController {
     @RequestMapping("hi")
     public String hello(){
 
-        List<User> allUser = userService.findAllUser();
-        for(User user : allUser){
-            System.out.println(user.toString());
-        }
-
-        System.out.println("into hello controller");
-        return "hello~~~~~~~~~~~~~~~";
+        return "jsp/frame";
     }
     @RequestMapping("/hi2")
     public ModelAndView  hello2(){

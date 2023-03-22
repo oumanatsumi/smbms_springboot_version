@@ -22,6 +22,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public User login(String userCode, String userPassword) {
         User loginUser = userMapper.getLoginUser(userCode);
+        System.out.println("Service层");
+        System.out.println(loginUser.toString());
         // 匹配密码
         if(null != loginUser){
             if(!loginUser.getUserPassword().equals(userPassword))

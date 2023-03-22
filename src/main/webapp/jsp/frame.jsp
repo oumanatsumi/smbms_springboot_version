@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="com.oumanatsumi.pojo.User" %>
-<%@ page import="com.oumanatsumi.utils.Constants" %>
+<%@ page import="com.ouma.pojo.User" %>
+<%@ page import="com.ouma.utils.Constants" %>
 <%@include file="/jsp/common/head.jsp"%>
 
 <%
