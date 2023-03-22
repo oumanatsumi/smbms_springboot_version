@@ -200,6 +200,7 @@ public class UserController {
         }
         // 总数量（表）
         int totalCount	= userService.getUserCount(queryUserName,queryUserRole);
+        System.out.println("totalCount :" + totalCount);
         // 总页数
         PageSupport pages=new PageSupport();
         pages.setCurrentPageNo(currentPageNo);

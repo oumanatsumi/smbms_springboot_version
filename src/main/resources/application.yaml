@@ -8,3 +8,8 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+
+server:
+  servlet:
+    session:
+      timeout: 3600s

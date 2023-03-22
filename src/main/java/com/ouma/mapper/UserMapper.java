@@ -21,25 +21,30 @@ public interface UserMapper {
     // 查询用户总数
     @Select({"<script>",
             "select count(1) as count from smbms_user u,smbms_role r",
-            "where u.userRole = r.id ",
+            "<where>",
+            "u.userRole = r.id",
             "<if test='userName != null and userName != \"\" '>",
-            " and u.userName like '%#{userName}%'",
+            " and u.userName like '%${userName}%' ",
             "</if>",
-            "<if test='userRole != null and userRole != \"\" '>",
+            "<if test='userRole != null and userRole != 0 '>",
             " and u.userRole = #{userRole}",
             "</if>",
+            "</where>",
             "</script>"})
     public int getUserCount(String userName, int userRole);
     // 查询用户列表
 
     @Select({"<script>",
-            "select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.userRole = r.id",
+            "select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r ",
+            "<where>",
+            "u.userRole = r.id",
             "<if test='userName != null and userName != \"\" '>",
-            " and u.userName like '%#{userName}%'",
+            " and u.userName like '%${userName}%'",
             "</if>",
-            "<if test='userRole != null and userRole != \"\" '>",
+            "<if test='userRole != null and userRole != 0 '>",
             " and u.userRole = #{userRole}",
             "</if>",
+            "</where>",
             " order by creationDate DESC limit #{currentPageNo},#{pageSize}",
             "</script>"})
     public List<User> getUserList(String userName, int userRole, int currentPageNo, int pageSize);
@@ -48,7 +53,6 @@ public interface UserMapper {
     @Insert("insert into smbms_user (userCode,userName,userPassword,userRole,gender," +
             "birthday,phone,address,creationDate,createdBy) values(#{userCode},#{userName},#{userPassword}," +
             "#{userRole},#{gender},#{birthday},#{phone},#{address},#{creationDate},#{createdBy})")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     public int add(User user);
 
     // 通过userId删除user
@@ -61,7 +65,7 @@ public interface UserMapper {
     public int modify(User user);
 
     // 通过userId查询user
-    @Select("select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.id=? and u.userRole = r.id")
+    @Select("select u.*,r.roleName as userRoleName from smbms_user u,smbms_role r where u.id=#{id} and u.userRole = r.id")
     public User getUserById(String id);
 
 }
